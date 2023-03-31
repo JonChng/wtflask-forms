@@ -22,7 +22,8 @@ def home():
 @app.route("/login", methods=['POST', 'GET'])
 def login():
     login_form = LoginForm()
-    login_form.validate_on_submit()
+    if login_form.validate_on_submit():
+        print(login_form.email.data)
     return render_template("login.html", form=login_form)
 
 if __name__ == '__main__':
