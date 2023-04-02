@@ -20,7 +20,7 @@ def home():
 
 
 @app.route("/login", methods=['POST', 'GET'])
-def login():
+def login_to():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         mail = login_form.email.data
