@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, EmailField, SubmitField
 import email_validator
 from wtforms.validators import DataRequired, Email, Length, email_validator
+from flask_bootstrap import Bootstrap
 
 
 
@@ -13,6 +14,7 @@ class LoginForm(FlaskForm):
 
 app = Flask(__name__)
 app.secret_key = "hawernasdofnwem"
+Bootstrap(app)
 
 @app.route("/")
 def home():
@@ -20,15 +22,15 @@ def home():
 
 
 @app.route("/login", methods=['POST', 'GET'])
-def login_to():
+def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         mail = login_form.email.data
         password = login_form.password.data
         if mail == "admin@gmail.com" and password == "12345678":
             return render_template("success.html")
-    else:
-        return render_template("denied.html")
+        else:
+            return render_template("denied.html")
 
     return render_template("login.html", form=login_form)
 
